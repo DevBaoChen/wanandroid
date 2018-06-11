@@ -9,10 +9,11 @@
 
 
   <ion-list>
-    <ion-item *ngFor="let dataListItem of dataList;" >
-      <ion-avatar item-start>
-        <img src="assets/imgs/logo.png">
-      </ion-avatar>
+    <ion-item *ngFor="let dataListItem of dataList;">
+      <!-- <ion-avatar item-start>
+          <ion-icon item-start name="heart" ></ion-icon>
+      </ion-avatar> -->
+      <ion-icon item-start name="heart" color="danger" ></ion-icon>
       <h4 style="font-size: 12px;">{{dataListItem.title.replace("/&mdash;/", "-")}}</h4>
       <ion-note item-end>{{dataListItem.niceDate}}</ion-note>
       <div style="font-size: 10px;">
@@ -23,5 +24,10 @@
       </div>
     </ion-item>
   </ion-list>
+  <!-- 颜色 -->
+  <ion-fab bottom right *ngIf="backTop"(click)="goTop()">
+   
+    <ion-icon ion-fab mini ios="ios-ice-cream" md="ios-ice-cream"></ion-icon>
+  </ion-fab>
 
 </ion-content>
