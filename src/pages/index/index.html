@@ -6,7 +6,22 @@
 -->
 
 <ion-content fullscreen>
-  
 
+
+  <ion-list>
+    <ion-item *ngFor="let dataListItem of dataList;" >
+      <ion-avatar item-start>
+        <img src="assets/imgs/logo.png">
+      </ion-avatar>
+      <h4 style="font-size: 12px;">{{dataListItem.title.replace("/&mdash;/", "-")}}</h4>
+      <ion-note item-end>{{dataListItem.niceDate}}</ion-note>
+      <div style="font-size: 10px;">
+        <span style="color: #aeacb4;font-size: 10px;">作者:</span>
+        <span>{{dataListItem.author}}</span>
+        <span style="color: #aeacb4;font-size: 10px;">分类:</span>
+        <span>{{dataListItem.chapterName}}</span>
+      </div>
+    </ion-item>
+  </ion-list>
 
 </ion-content>

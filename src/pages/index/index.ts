@@ -15,6 +15,7 @@ import { HttpProvider } from "../../providers/http/http";
   templateUrl: 'index.html',
 })
 export class IndexPage {
+  dataList:any=[];
 
   constructor(
     private httpProvider: HttpProvider,
@@ -27,13 +28,15 @@ export class IndexPage {
     this.getData();
   }
   getData() {
-    // 
     this.httpProvider.GET("http://www.wanandroid.com/article/list/0/json", "", (res, err) => {
       if (err) {
         console.log(err);
       }
       if (res) {
-        console.log(res);
+        for(var i=0;i< res.data.datas.length;i++){
+          res.data.datas[i].title =res.data.datas[i].title.replace("&mdash;","-").replace("&mdash;","-").replace("&ndash;","-").replace("&ldquo;","“").replace("&rdquo;","”")
+        }
+        this.dataList = res.data.datas;
       }
     })
   }
