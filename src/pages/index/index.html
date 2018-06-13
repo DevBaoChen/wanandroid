@@ -19,7 +19,7 @@
     </div>
   </div>
   <ion-list>
-    <ion-item *ngFor="let dataListItem of dataList;">
+    <ion-item *ngFor="let dataListItem of dataList;" (click)="showArticleDetail(dataListItem)">
       <!-- <ion-icon item-start name="heart" color="danger" ></ion-icon> -->
       <ion-icon item-start name="heart"></ion-icon>
       <h4 style="font-size: 12px;">{{dataListItem.title}}</h4>

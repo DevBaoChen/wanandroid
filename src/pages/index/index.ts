@@ -1,6 +1,7 @@
 import { Component, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { HttpProvider } from "../../providers/http/http";
+import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
 
 /**
  * Generated class for the IndexPage page.
@@ -26,6 +27,7 @@ export class IndexPage {
     private cd: ChangeDetectorRef,
     private httpProvider: HttpProvider,
     public navCtrl: NavController,
+    private iab: InAppBrowser,
     public navParams: NavParams) {
   }
 
@@ -73,7 +75,7 @@ export class IndexPage {
  * 获取轮播图 数据
  */
   getBannerData() {
-    this.httpProvider.GET("http://www.wanandroid.com/banner/json","",(res,err)=>{
+    this.httpProvider.GET("http://www.wanandroid.com/banner/json", "", (res, err) => {
       if (err) {
         console.log(err);
       }
@@ -123,6 +125,17 @@ export class IndexPage {
       infiniteScroll.complete();
     }, 10000);
   }
-
-
+  showArticleDetail(dataListItem) {
+ 
+    let options: InAppBrowserOptions = {
+      location: 'no',
+      toolbarposition: 'top',
+      closebuttoncaption: '关闭',
+      closebuttoncolor: "#ffa017",
+      hidenavigationbuttons: "yes",
+      // toolbarcolor: '#FFFFFF'
+    };
+    const browser = this.iab.create(dataListItem.link, '_blank', options);
+    browser.show();
+  }
 }
