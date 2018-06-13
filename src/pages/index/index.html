@@ -22,6 +22,9 @@
       </div>
     </ion-item>
   </ion-list>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" [enabled]="isInfiniteEnabled">
+    <ion-infinite-scroll-content loadingSpinner="circles" loadingText="加载更多..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
   <!-- 颜色 -->
   <ion-fab bottom right *ngIf="backTop"(click)="goTop()">
    

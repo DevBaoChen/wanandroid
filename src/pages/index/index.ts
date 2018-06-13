@@ -18,7 +18,8 @@ export class IndexPage {
   @ViewChild(Content) content: Content;
   dataList: any = [];
   backTop: any = false;
-
+  pageNumber: any = 0;
+  isInfiniteEnabled: boolean = true;
   constructor(
     private cd: ChangeDetectorRef,
     private httpProvider: HttpProvider,
@@ -50,7 +51,7 @@ export class IndexPage {
     }
   }
   getData() {
-    this.httpProvider.GET("http://www.wanandroid.com/article/list/0/json", "", (res, err) => {
+    this.httpProvider.GET("http://www.wanandroid.com/article/list/" + this.pageNumber + "/json", "", (res, err) => {
       if (err) {
         console.log(err);
       }
@@ -58,9 +59,31 @@ export class IndexPage {
         for (var i = 0; i < res.data.datas.length; i++) {
           res.data.datas[i].title = res.data.datas[i].title.replace("&mdash;", "-").replace("&mdash;", "-").replace("&ndash;", "-").replace("&ldquo;", "“").replace("&rdquo;", "”")
         }
-        this.dataList = res.data.datas;
+        if (this.pageNumber > 0) {
+          this.dataList = this.dataList.concat(res.data.datas);
+        } else {
+          this.dataList = res.data.datas;
+        }
+        if (res.data.datas.length < 10) {
+          this.isInfiniteEnabled = false;
+        } else {
+          this.isInfiniteEnabled = true;
+        }
+
       }
     })
   }
+  /**
+    * 加载下一页
+    * @param infiniteScroll 
+    */
+  doInfinite(infiniteScroll) {
+    this.pageNumber = ++this.pageNumber;
+    this.getData();
+    setTimeout(() => {
+      infiniteScroll.complete();
+    }, 10000);
+  }
+
 
 }
