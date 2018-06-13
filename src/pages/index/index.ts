@@ -8,7 +8,7 @@ import { HttpProvider } from "../../providers/http/http";
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-
+declare var Swiper;
 @IonicPage()
 @Component({
   selector: 'page-index',
@@ -20,6 +20,8 @@ export class IndexPage {
   backTop: any = false;
   pageNumber: any = 0;
   isInfiniteEnabled: boolean = true;
+  bannerList: any = [];
+  swiper: any;
   constructor(
     private cd: ChangeDetectorRef,
     private httpProvider: HttpProvider,
@@ -29,6 +31,20 @@ export class IndexPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad IndexPage');
+    this.getBannerData();
+    this.swiper = new Swiper('.swiper-container', {
+      direction: 'horizontal',
+      speed: 300,
+      observer: true,
+      autoplay: {
+        delay: 3000,
+        stopOnLastSlide: false,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+      }
+    });
     this.getData();
     this.content.ionScroll.subscribe(($event: any) => {
 
@@ -42,6 +58,29 @@ export class IndexPage {
         this.cd.detectChanges();
       } catch (error) {
         console.error(error)
+      }
+    })
+  }
+  ionViewDidEnter() {  //每次都会重新刷新数据
+    //自动播放
+    this.swiper.autoplay.start();
+  }
+  ionViewDidLeave() {
+    //页面离开时停止自动播放
+    this.swiper.autoplay.stop();
+  }
+  /**
+ * 获取轮播图 数据
+ */
+  getBannerData() {
+    this.httpProvider.GET("http://www.wanandroid.com/banner/json","",(res,err)=>{
+      if (err) {
+        console.log(err);
+      }
+      if (res) {
+        console.log(res);
+        this.bannerList = res.data;
+        console.log(this.bannerList);
       }
     })
   }

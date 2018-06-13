@@ -7,12 +7,22 @@
 
 <ion-content fullscreen>
 
-
+  <div style="width:100%;height:170px;">
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" *ngFor="let bannerListItem of bannerList">
+          <img style="height: 170px;width:100%;" src="{{bannerListItem.imagePath}}">
+        </div>
+      </div>
+      <!-- 如果需要分页器 -->
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
   <ion-list>
     <ion-item *ngFor="let dataListItem of dataList;">
       <!-- <ion-icon item-start name="heart" color="danger" ></ion-icon> -->
       <ion-icon item-start name="heart"></ion-icon>
-      <h4 style="font-size: 12px;">{{dataListItem.title.replace("/&mdash;/", "-")}}</h4>
+      <h4 style="font-size: 12px;">{{dataListItem.title}}</h4>
       <ion-note item-end>{{dataListItem.niceDate}}</ion-note>
       <div style="font-size: 10px;">
         <span style="color: #aeacb4;font-size: 10px;">作者:</span>
@@ -26,8 +36,7 @@
     <ion-infinite-scroll-content loadingSpinner="circles" loadingText="加载更多..."></ion-infinite-scroll-content>
   </ion-infinite-scroll>
   <!-- 颜色 -->
-  <ion-fab bottom right *ngIf="backTop"(click)="goTop()">
-   
+  <ion-fab bottom right *ngIf="backTop" (click)="goTop()">
     <ion-icon ion-fab mini ios="ios-ice-cream" md="ios-ice-cream"></ion-icon>
   </ion-fab>
 
