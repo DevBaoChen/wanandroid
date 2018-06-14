@@ -45,9 +45,13 @@ export class TreePage {
     })
 
   }
-  goTreeChildren(title,item){
+  goTreeChildren(title, item) {
     console.log(title);
     console.log(item);
+    this.navCtrl.push("ChildrenTreePage", {
+      title: title,
+      data: item
+    })
 
   }
 

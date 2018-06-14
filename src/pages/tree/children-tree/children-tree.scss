@@ -1,0 +1,19 @@
+page-children-tree {
+    ion-content{
+        background-color: white !important; 
+        }
+
+    .slide-title {
+        height: 50px;
+        color: #666666;
+        padding: 0;
+        text-align: left;
+        background-color: white;
+        
+      }
+    
+      .slide-title-active{
+        color: #488aff !important;
+        border-bottom: 1px solid #488aff !important;
+      }
+}

@@ -1,0 +1,44 @@
+<!--
+  Generated template for the ChildrenTreePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{title}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content fullscreen>
+  <ion-slides class="slide-title" [slidesPerView]="3.5" [pager]="false">
+    <ion-slide *ngFor="let slide of data;" (click)="onSlideClick(slide)">
+        <span style="font-size: 10px;" [ngClass]="{'slide-title-active': slideCss == slide.id}">{{slide.name}}</span>
+    </ion-slide>
+  </ion-slides>
+  <ion-list>
+      <ion-item *ngFor="let dataListItem of dataList;" (click)="showArticleDetail(dataListItem)">
+        <!-- <ion-icon item-start name="heart" color="danger" ></ion-icon> -->
+        <ion-icon item-start name="heart"></ion-icon>
+        <h4 style="font-size: 12px;">{{dataListItem.title}}</h4>
+        <ion-note item-end>{{dataListItem.niceDate}}</ion-note>
+        <div style="font-size: 10px;">
+          <span style="color: #aeacb4;font-size: 10px;">作者:</span>
+          <span>{{dataListItem.author}}</span>
+          <!-- <span style="color: #aeacb4;font-size: 10px;">分类:</span>
+          <span>{{dataListItem.chapterName}}</span> -->
+        </div>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" [enabled]="isInfiniteEnabled">
+      <ion-infinite-scroll-content loadingSpinner="circles" loadingText="加载更多..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    <!-- 颜色 -->
+    <ion-fab bottom right *ngIf="backTop" (click)="goTop()">
+      <ion-icon ion-fab mini ios="ios-ice-cream" md="ios-ice-cream"></ion-icon>
+    </ion-fab>
+
+</ion-content>
