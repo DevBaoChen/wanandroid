@@ -81,8 +81,12 @@ export class IndexPage {
       }
       if (res) {
         console.log(res);
-        this.bannerList = res.data;
-        console.log(this.bannerList);
+        if (!(res.errorCode < 0)) {
+          this.bannerList = res.data;
+          console.log(this.bannerList);
+        } else {
+          console.log(res.errorMsg);
+        }
       }
     })
   }
@@ -97,19 +101,25 @@ export class IndexPage {
         console.log(err);
       }
       if (res) {
-        for (var i = 0; i < res.data.datas.length; i++) {
-          res.data.datas[i].title = res.data.datas[i].title.replace("&mdash;", "-").replace("&mdash;", "-").replace("&ndash;", "-").replace("&ldquo;", "“").replace("&rdquo;", "”")
-        }
-        if (this.pageNumber > 0) {
-          this.dataList = this.dataList.concat(res.data.datas);
+        console.log(res);
+        if (!(res.errorCode < 0)) {
+          for (var i = 0; i < res.data.datas.length; i++) {
+            res.data.datas[i].title = res.data.datas[i].title.replace("&mdash;", "-").replace("&mdash;", "-").replace("&ndash;", "-").replace("&ldquo;", "“").replace("&rdquo;", "”")
+          }
+          if (this.pageNumber > 0) {
+            this.dataList = this.dataList.concat(res.data.datas);
+          } else {
+            this.dataList = res.data.datas;
+          }
+          if (res.data.datas.length < 10) {
+            this.isInfiniteEnabled = false;
+          } else {
+            this.isInfiniteEnabled = true;
+          }
         } else {
-          this.dataList = res.data.datas;
+          console.log(res.errorMsg);
         }
-        if (res.data.datas.length < 10) {
-          this.isInfiniteEnabled = false;
-        } else {
-          this.isInfiniteEnabled = true;
-        }
+
 
       }
     })
@@ -126,7 +136,7 @@ export class IndexPage {
     }, 10000);
   }
   showArticleDetail(dataListItem) {
- 
+
     let options: InAppBrowserOptions = {
       location: 'no',
       toolbarposition: 'top',

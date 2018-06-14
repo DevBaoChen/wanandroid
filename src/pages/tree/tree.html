@@ -7,12 +7,18 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>tree</ion-title>
+    <ion-title>知识体系</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content fullscreen>
 
+  <ion-list>
+    <button ion-item *ngFor="let dataListItem of dataList" (click)="goTreeChildren(dataListItem.name,dataListItem.children)">
+      <h2>{{dataListItem.name}}</h2>
+      <span style="color: gray; font-size: 12px;margin-right: 10px;" *ngFor="let childrenDataListItem of dataListItem.children">{{childrenDataListItem.name}}</span>
+    </button>
+  </ion-list>
 </ion-content>
