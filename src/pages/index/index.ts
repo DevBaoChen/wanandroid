@@ -2,7 +2,7 @@ import { Component, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { HttpProvider } from "../../providers/http/http";
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
-
+import { LoadingProvider } from "../../providers/loading/loading";
 /**
  * Generated class for the IndexPage page.
  *
@@ -24,6 +24,7 @@ export class IndexPage {
   bannerList: any = [];
   swiper: any;
   constructor(
+    private loadingProvider: LoadingProvider,
     private cd: ChangeDetectorRef,
     private httpProvider: HttpProvider,
     public navCtrl: NavController,
@@ -96,6 +97,7 @@ export class IndexPage {
     }
   }
   getData() {
+    this.loadingProvider.presentLoadingDefault();
     this.httpProvider.GET("http://www.wanandroid.com/article/list/" + this.pageNumber + "/json", "", (res, err) => {
       if (err) {
         console.log(err);
@@ -120,7 +122,7 @@ export class IndexPage {
           console.log(res.errorMsg);
         }
 
-
+        this.loadingProvider.dismissLoadingDefault();
       }
     })
   }

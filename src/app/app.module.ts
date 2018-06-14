@@ -8,6 +8,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpProvider } from '../providers/http/http';
 import { HttpClientModule } from '@angular/common/http';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { LoadingProvider } from '../providers/loading/loading';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HttpProvider,
-    InAppBrowser
+    InAppBrowser,
+    LoadingProvider
   ]
 })
 export class AppModule {}

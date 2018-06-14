@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HttpProvider } from "../../providers/http/http";
+import { LoadingProvider } from "../../providers/loading/loading";
 
 /**
  * Generated class for the TreePage page.
@@ -18,6 +19,7 @@ export class TreePage {
   dataList: any = [];
 
   constructor(
+    private loadingProvider: LoadingProvider,
     private httpProvider: HttpProvider,
     public navCtrl: NavController,
     public navParams: NavParams) {
@@ -28,6 +30,7 @@ export class TreePage {
     this.getData();
   }
   getData() {
+    this.loadingProvider.presentLoadingDefault();
     this.httpProvider.GET("http://www.wanandroid.com/tree/json", "", (res, err) => {
       if (err) {
         console.log(err);
@@ -42,6 +45,7 @@ export class TreePage {
         }
 
       }
+      this.loadingProvider.dismissLoadingDefault();
     })
 
   }

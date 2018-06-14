@@ -2,6 +2,7 @@ import { Component, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { HttpProvider } from "../../../providers/http/http";
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
+import { LoadingProvider } from "../../../providers/loading/loading";
 
 /**
  * Generated class for the ChildrenTreePage page.
@@ -28,6 +29,7 @@ export class ChildrenTreePage {
   slideCss: number = 0;
   constructor(private cd: ChangeDetectorRef,
     private httpProvider: HttpProvider,
+    private loadingProvider: LoadingProvider,
     public navCtrl: NavController,
     private iab: InAppBrowser,
     public navParams: NavParams) {
@@ -62,6 +64,9 @@ export class ChildrenTreePage {
     }
   }
   getData() {
+    if(this.pageNumber ==0){
+      this.loadingProvider.presentLoadingDefault();
+    }
     this.httpProvider.GET("http://www.wanandroid.com/article/list/" + this.pageNumber + "/json?cid="+ this.treeId, "", (res, err) => {
       if (err) {
         console.log(err);
@@ -86,6 +91,7 @@ export class ChildrenTreePage {
           console.log(res.errorMsg);
         }
       }
+      this.loadingProvider.dismissLoadingDefault();
     })
   }
     /**
