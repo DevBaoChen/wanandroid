@@ -7,12 +7,36 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>login</ion-title>
+    <ion-title>登录</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <ion-list>
 
+    <ion-item>
+      <ion-label floating>用户名</ion-label>
+      <ion-input [(ngModel)]="username" clearInput></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>密码</ion-label>
+      <ion-input [(ngModel)]="password" type="{{isShowPassword?'text':'password'}}" clearInput></ion-input>
+      <button ion-button clear color="dark" item-right (click)="showPassword($event)" class="show-btn">
+        <ion-icon name="{{isShowPassword?'eye':'eye-off'}}"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
+
+  <div padding>
+    <button ion-button block (click)="login()">登录</button>
+    <ion-row >
+        <ion-col text-center>
+          <button ion-button clear small color="gray">
+            注册
+          </button>
+        </ion-col>
+      </ion-row>
+  </div>
 </ion-content>
