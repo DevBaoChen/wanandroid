@@ -97,7 +97,9 @@ export class IndexPage {
     }
   }
   getData() {
-    this.loadingProvider.presentLoadingDefault();
+    if(this.pageNumber ==0){
+      this.loadingProvider.presentLoadingDefault();
+    }
     this.httpProvider.GET("http://www.wanandroid.com/article/list/" + this.pageNumber + "/json", "", (res, err) => {
       if (err) {
         console.log(err);
@@ -113,7 +115,7 @@ export class IndexPage {
           } else {
             this.dataList = res.data.datas;
           }
-          if (res.data.datas.length < 10) {
+          if (res.data.datas.length < 20) {
             this.isInfiniteEnabled = false;
           } else {
             this.isInfiniteEnabled = true;

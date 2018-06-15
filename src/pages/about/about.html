@@ -4,15 +4,40 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<!-- <ion-header>
 
   <ion-navbar>
-    <ion-title>about</ion-title>
+    <ion-title>关于我</ion-title>
   </ion-navbar>
 
-</ion-header>
+</ion-header> -->
 
 
-<ion-content padding>
-
+<ion-content fullscreen>
+  <ion-list>
+    <ion-item style="height: 100px;background-color:  #488aff">
+      <ion-avatar item-start>
+        <img src="./assets/imgs/logo.png">
+      </ion-avatar>
+      <ion-col text-center (click)="goLogin()">
+        <button ion-button clear small color="light" icon-start>
+          登录/注册
+        </button>
+      </ion-col>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <button ion-item>
+      <img class="img_icon" aria-hidden="true" src="./assets/imgs/logo.png" />
+      <span style="margin-left: 10px">我的收藏</span>
+    </button>
+    <button ion-item>
+      <img class="img_icon" aria-hidden="true" src="./assets/imgs/logo.png" />
+      <span style="margin-left: 10px">关于我</span>
+    </button>
+    <button ion-item>
+      <img class="img_icon" aria-hidden="true" src="./assets/imgs/logo.png" />
+      <span style="margin-left: 10px">退出登录</span>
+    </button>
+  </ion-list>
 </ion-content>
