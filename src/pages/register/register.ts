@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HttpProvider } from "../../providers/http/http";
 import { LoadingProvider } from "../../providers/loading/loading";
-
 /**
- * Generated class for the LoginPage page.
+ * Generated class for the RegisterPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -12,12 +11,14 @@ import { LoadingProvider } from "../../providers/loading/loading";
 
 @IonicPage()
 @Component({
-  selector: 'page-login',
-  templateUrl: 'login.html',
+  selector: 'page-register',
+  templateUrl: 'register.html',
 })
-export class LoginPage {
-   username:any="";
-   password:any ="";
+export class RegisterPage {
+
+  username:any="";
+  password:any ="";
+  repassword:any ="";
   constructor(
     private loadingProvider: LoadingProvider,
     private httpProvider: HttpProvider,
@@ -26,37 +27,31 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+    console.log('ionViewDidLoad RegisterPage');
   }
-
-  login(){
-    console.log(this.username);
-    console.log(this.password);
+  
+  register(){
     var params = {
       username : this.username,
-      password : this.password
+      password : this.password,
+      repassword: this.repassword
     }
     this.loadingProvider.presentLoadingDefault();
-    this.httpProvider.POST("http://www.wanandroid.com/user/login",params,(res,err)=>{
+    this.httpProvider.POST("http://www.wanandroid.com/user/register",params,(res,err)=>{
       if (err) {
         console.log(err);
       }
       if (res) {
         console.log(res);
         if (!(res.errorCode < 0)) {
-          window.localStorage.setItem("username",res.data.username);
-          window.localStorage.setItem("password",res.data.password);
           this.navCtrl.pop();
-
         }else{
           console.log(res.errorMsg);
         }
       }
     })
     this.loadingProvider.dismissLoadingDefault();
-  }
-  register(){
-    this.navCtrl.push("RegisterPage");
-  }
 
+
+  }
 }

@@ -20,9 +20,9 @@
   </div>
   <ion-list>
     <ion-item *ngFor="let dataListItem of dataList;" (click)="showArticleDetail(dataListItem)">
-      <!-- <ion-icon item-start name="heart" color="danger" ></ion-icon> -->
-      <ion-icon item-start name="heart"></ion-icon>
-      <h4 style="font-size: 12px;">{{dataListItem.title}}</h4>
+      <ion-icon *ngIf="dataListItem.collect"  item-start name="heart" color="danger" ></ion-icon>
+      <ion-icon *ngIf="!dataListItem.collect" item-start name="heart"></ion-icon>
+      <h4 style="font-size: 12px;">{{dataListItem.title}} </h4>
       <ion-note item-end>{{dataListItem.niceDate}}</ion-note>
       <div style="font-size: 10px;">
         <span style="color: #aeacb4;font-size: 10px;">作者:</span>
