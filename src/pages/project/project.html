@@ -7,12 +7,17 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>project</ion-title>
+    <ion-title>项目</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content >
 
+  <ion-list>
+    <button ion-item *ngFor="let item of projectDataList" (click)="itemSelected(item)">
+      {{ item.name }}
+    </button>
+  </ion-list>
 </ion-content>
